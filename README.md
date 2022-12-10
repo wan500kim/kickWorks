@@ -26,15 +26,16 @@ keras==2.10.0
 Keras-Preprocessing==1.1.2
 numpy==1.23.4
 pandas==1.5.1
-
+flask==2.2.2
 ```
 
 ---
 ### 실행 방법
-1. BananaKickRun.py 실행
-
-
+1. app.py 실행
+2. 실행시 출력되는 https://0.0.0.0:2278/ 로 접속
+3. 입력창에 필터링하고자하는 문장을 입력
 ---
+
 ### License
 ```
 MIT License
