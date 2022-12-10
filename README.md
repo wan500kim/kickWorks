@@ -4,17 +4,22 @@
 
 웹에서 구동되며 비속어로 판단된 어절을 같은 글자 수의 순화된 단어로 치환합니다.
 
+#### 시연 영상
+<img src="https://user-images.githubusercontent.com/74997157/206855487-09968a5a-4d3e-4ed8-a180-bb894434d699.gif"/>
+
 ---
 ### 설치 방법
 TBD
 
 ---
 ### 의존성
-python 3.X
+python : v3.X
+Web browser : Chrome(recommend)
 
 ---
 ### 실행 방법
-TBD
+1. BananaKickRun.py 실행
+
 
 ---
 ### License
