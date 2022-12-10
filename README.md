@@ -17,6 +17,17 @@ TBD
 python : v3.9.X
 Web browser : Chrome(recommend)
 
+```
+fasttext==0.9.2
+gensim==4.2.0
+hgtk==0.1.3
+joblib==1.2.0
+keras==2.10.0
+Keras-Preprocessing==1.1.2
+numpy==1.23.4
+pandas==1.5.1
+```
+
 ---
 ### 실행 방법
 1. BananaKickRun.py 실행
