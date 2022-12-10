@@ -22,7 +22,7 @@ flask
 
 
 <h2>예시 영상</h2>
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/74997157/206855487-09968a5a-4d3e-4ed8-a180-bb894434d699.gif)
+<img src="https://user-images.githubusercontent.com/74997157/206855487-09968a5a-4d3e-4ed8-a180-bb894434d699.gif"/>
 https://0.0.0.0:2278
 
 
