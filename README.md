@@ -6,8 +6,7 @@
 
 #### 시연 영상 (클릭하여 재생)
 
-<img src="https://user-images.githubusercontent.com/74997157/206855487-09968a5a-4d3e-4ed8-a180-bb894434d699.gif"/>
-
+<img src="https://user-images.githubusercontent.com/74997157/206859407-3415445a-2927-48ef-b488-6eb8ca26bba9.gif"/>
 
 ---
 ### 설치 방법
