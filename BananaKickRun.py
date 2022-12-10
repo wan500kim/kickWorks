@@ -1,4 +1,10 @@
 import re
+from gensim.models import FastText
+from keras.models import load_model
+import numpy as np
+import warnings
+import random
+warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
 with open('./fword_list.txt', 'r', encoding='UTF8') as f:
     fword_str = ''
@@ -31,10 +37,6 @@ def make_trigram(sentence):
 
 
 # 모델 불러오기
-from gensim.models import FastText
-from keras.models import load_model
-import numpy as np
-
 fasttext_model = FastText.load("./Fasttext.model")
 cnn_model = load_model("./CNN_model")
 
@@ -80,51 +82,7 @@ def kor_decompose(word, end_char="_"):
     return "".join(result)
 
 
-    # vectorize를 위해 리스트를 청크 단위로 분해
-# n = 청크 단위
-def chunks(l, n, trigram_list):
-        for i in range(0, len(l), n):
-            yield (l[i:i + n], trigram_list[i//n][-1])
-
-
-# 자모분리기
-CHOSUNG_LIST = [u'ㄱ',u'ㄲ',u'ㄴ',u'ㄷ',u'ㄸ',u'ㄹ',u'ㅁ',u'ㅂ',u'ㅃ',u'ㅅ',u'ㅆ',u'ㅇ',u'ㅈ',u'ㅉ',u'ㅊ',u'ㅋ',u'ㅌ',u'ㅍ',u'ㅎ']
-JOONGSUNG_LISTS = [u'ㅏ',u'ㅐ',u'ㅑ',u'ㅒ',u'ㅓ',u'ㅔ',u'ㅕ',u'ㅖ',u'ㅗ',u'ㅘ',u'ㅙ',u'ㅚ',u'ㅛ',u'ㅜ',u'ㅝ',u'ㅞ',u'ㅟ',u'ㅠ',u'ㅡ',u'ㅢ',u'ㅣ']
-JONGSUNG_LIST = [u'_',u'ㄱ',u'ㄲ',u'ㄳ',u'ㄴ',u'ㄵ',u'ㄶ',u'ㄷ',u'ㄹ',u'ㄺ',u'ㄻ',u'ㄼ',u'ㄽ',u'ㄾ',u'ㄿ',u'ㅀ',u'ㅁ',u'ㅂ',u'ㅄ',u'ㅅ',u'ㅆ',u'ㅇ',u'ㅈ',u'ㅊ',u'ㅋ',u'ㅌ',u'ㅍ',u'ㅎ']
-
-def kor_decompose(word, end_char="_"):
-    result = []
-    
-    for char in word:
-        char_unicode = ord(char)
-        
-        if 0xD7A3 < char_unicode or char_unicode < 0xAC00:
-            result.append(char)
-            continue
-
-        chosung_index = int((((char_unicode - 0xAC00) / 28) / 21) % 19)
-        joongsung_index = int(((char_unicode - 0xAC00) / 28) % 21)
-        jongsung_index = int((char_unicode - 0xAC00) % 28)
-        
-        chosung = CHOSUNG_LIST[chosung_index]
-        joongsung = JOONGSUNG_LISTS[joongsung_index]
-        jongsung = JONGSUNG_LIST[jongsung_index]
-        
-        # 종성이 없을 경우 end_char
-        if jongsung_index == 0:
-            jongsung = end_char
-        
-        result.append(chosung)
-        result.append(joongsung)
-        result.append(jongsung)
-
-    return "".join(result)
-
-
-import warnings
-warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
-mode = 0
-
+# 실행 함수
 def bananaKick(origin_text: str, ref_val=0.65, modes=0):
     global mode
     mode = modes
@@ -138,7 +96,10 @@ def bananaKick(origin_text: str, ref_val=0.65, modes=0):
     trigram_vec = np.array([np.append(_[0].flatten(), _[1]) for _ in trigram_vec]) # 151 dimension
 
     # 단어 위치만 뽑아내어 분리
-    word_index = np.int8(trigram_vec[:, -1])
+    try:
+        word_index = np.int8(trigram_vec[:, -1])
+    except: 
+        return origin_text
     trigram_vec = np.delete(trigram_vec, -1, axis=1)
 
     # keras input에 맞추기
@@ -168,10 +129,10 @@ def cnn_predict(trigram_vec, ref_val, word_index):
     return last_index, result
 
 def cnn_describe(trigram_vec, result, word_index):
-    print("단어 위치\n", word_index)
-    print("예측 확률 값\n", cnn_model.predict(trigram_vec))
-    print('result =', result)
-    print("Class와 단어 위치\n", list(zip(result, word_index.tolist())))
+    print("1. 단어 위치\n", word_index)
+    print("2. 예측 확률\n", cnn_model.predict(trigram_vec))
+    print('3. result =', result)
+    print("4. Class, 단어 위치\n", list(zip(result, word_index.tolist())))
 
 
 def cnn_result(last_index, result, origin_text, trigram_list):
@@ -205,9 +166,8 @@ def cnn_result(last_index, result, origin_text, trigram_list):
 
     return result
 
-import random
+# 순화 단어 리스트
 def happyWord(num: int):
-    # 순화
     if num == 1:   return random.choice(['꽃', '꿀', '굿'])
     elif num == 2: return random.choice(['아잉', '어머', '좋아', '멋져'])
     elif num == 3: return  random.choice(['사랑해', '나이스', '멋쟁이'])
@@ -222,11 +182,12 @@ def clear_word(word):
     return word
 
 
-
 if __name__ == "__main__":
     while True:
         text = input('입력: ')
         if text == '/종료': break
         
-        result = bananaKick(text, modes=0)
+        # modes=0 : 기본값, 결과 문장만 출력
+        # modes=1 : 상세 정보 출력
+        result = bananaKick(text, modes=1)
         print(result)
