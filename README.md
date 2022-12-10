@@ -14,8 +14,8 @@ TBD
 
 ---
 ### 의존성
-python : v3.9.X
-Web browser : Chrome(recommend)
+- python : v3.9.X
+- Web browser : Chrome(recommend)
 
 ```
 fasttext==0.9.2
