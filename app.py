@@ -20,7 +20,8 @@ def test():
 
     else:
         result = str()
-        
+        #입력 값이 없으면 null 출력
+	
     return(
 		"""<form action="" method="post">
 				input : <input type="text" name="instr">
