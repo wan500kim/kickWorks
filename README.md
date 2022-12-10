@@ -2,9 +2,9 @@
 
 해당 프로젝트는 딥러닝을 통한 비속어 필터링 서비스를 제공합니다.
 
-웹에서 구동되며 비속어로 판단된 어절을 같은 글자 수의 순화된 단어로 치환합니다.
+웹에서 구동되며 비속어로 판단된 어절을 같은 글자 수의 **순화된 단어로 치환**합니다.
 
-#### 시연 영상
+#### 시연 영상 (클릭하여 재생)
 <img src="https://user-images.githubusercontent.com/74997157/206855487-09968a5a-4d3e-4ed8-a180-bb894434d699.gif"/>
 
 ---
@@ -13,7 +13,7 @@ TBD
 
 ---
 ### 의존성
-python : v3.X
+python : v3.9.X
 Web browser : Chrome(recommend)
 
 ---
@@ -37,5 +37,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ---
 ### Contributors
-- YoungChan-Park, adap8709@naver.com
+- YoungChan-Park, adap8709@gmail.com
 - WanSoo-Kim, dhkstn0219@gmail.com
