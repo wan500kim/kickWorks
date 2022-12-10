@@ -31,4 +31,5 @@ https://0.0.0.0:2278
 
 <h2>라이선스, 연락처</h2>
 참고: http://ndcreplay.nexon.com/NDC2018/sessions/NDC2018_0033.html#c=NDC2018&t%5B%5D=%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&k%5B%5D=%EC%A1%B0%EC%9A%A9%EB%9E%98
+
 연락처: 박영찬(adap8709@gmail.com), 김완수(dhkstn0219@gmail.com)
